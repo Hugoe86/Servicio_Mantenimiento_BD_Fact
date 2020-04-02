@@ -18,7 +18,8 @@ namespace SW_Mantenimiento_BD_Facturacion
 
         #region Variables
         public Timer Tmr_Intervalor;
-        public Int32 intervalo = 5000;
+        //public Int32 intervalo = 5000;//    prueba 5 seg
+        public Int32 intervalo = 1800000; //    30 minutos
         public Int32 dias = 30;
         public string ruta = @"C:\\Respaldos_Bds\\Diarios";
         #endregion
@@ -66,16 +67,17 @@ namespace SW_Mantenimiento_BD_Facturacion
 
             try
             {
-                //ruta = ConfigurationManager.AppSettings["Ruta"].ToString();
                 DirectoryInfo Directorios = new DirectoryInfo(ruta);
-
-                //dias = Convert.ToInt32(ConfigurationManager.AppSettings["Dias"]);
 
 
                 //  se recorren las carpetas
                 foreach (var carpeta in Directorios.GetDirectories())
                 {
                     //Console.WriteLine(carpeta.Name);
+
+                    //SW.WriteLine(fecha_actual.ToString("dd/MM/yyyy"));
+                    //SW.WriteLine(carpeta.Name);
+
 
                     //  se obtienen los archivos
                     DirectoryInfo Archivos = new DirectoryInfo(ruta + "\\" + carpeta.Name);
@@ -84,6 +86,9 @@ namespace SW_Mantenimiento_BD_Facturacion
                     foreach (var archivo in Archivos.GetFiles())
                     {
                         //Console.WriteLine(archivo.Name);
+
+                        //SW.WriteLine(archivo.Name);
+
 
                         //  se inicializan las variables
 
@@ -132,11 +137,15 @@ namespace SW_Mantenimiento_BD_Facturacion
                         dias_transcurridos = ts_dias_transcurridos.Days;
                         //Console.WriteLine(dias_transcurridos);
 
+
+                        //SW.WriteLine(dias_transcurridos);
+
                         //  validamos la cantidad de dias
                         if (dias_transcurridos >= dias)
                         {
                             File.Delete(ruta + "\\" + carpeta.Name + "\\" + archivo.Name);
                             //Console.WriteLine("Borrado ****" + archivo.Name);
+                            //SW.WriteLine("Borrado ****" + archivo.Name);
                         }
 
 
@@ -149,11 +158,13 @@ namespace SW_Mantenimiento_BD_Facturacion
             }
             catch (Exception ex)
             {
+                //SW.WriteLine(ex.Message);
                 throw new Exception(ex.Message);
                 //SW.WriteLine(ex.Message);
             }
             finally
             {
+                //SW.Close();
                 //SW.Close();
             }
         }
