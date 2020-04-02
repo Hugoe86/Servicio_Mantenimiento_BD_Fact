@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading.Tasks;
 
-
-namespace Servicio_Windows_MantenimientoBD
+namespace SW_Mantenimiento_BD_Facturacion
 {
     static class Program
     {
@@ -14,12 +14,10 @@ namespace Servicio_Windows_MantenimientoBD
         /// </summary>
         static void Main()
         {
-
-
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Servicio_Mantenimiento()
+                new Servicio()
             };
             ServiceBase.Run(ServicesToRun);
         }

@@ -10,49 +10,41 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.IO;
 
-namespace Servicio_Windows_MantenimientoBD
+namespace SW_Mantenimiento_BD_Facturacion
 {
-    public partial class Servicio_Mantenimiento : ServiceBase
+    public partial class Servicio : ServiceBase
     {
 
+
         #region Variables
-        public System.Timers.Timer Tmr_Intervalor;
+        public Timer Tmr_Intervalor;
         public Int32 intervalo = 5000;
         public Int32 dias = 30;
         public string ruta = @"C:\\Respaldos_Bds\\Diarios";
         #endregion
 
 
-
-        #region Metodo_Inicial
-        public Servicio_Mantenimiento()
+        public Servicio()
         {
             InitializeComponent();
+
             Tmr_Intervalor = new System.Timers.Timer();
             Tmr_Intervalor.Interval = intervalo;
             Tmr_Intervalor.Elapsed += new ElapsedEventHandler(Tmr_Intervalor_Acciones);
         }
-        #endregion
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
             Tmr_Intervalor.Enabled = true;
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         protected override void OnStop()
         {
         }
 
 
         #region Metodos_Operacion
-       
+
 
         /// <summary>
         /// 
@@ -167,6 +159,5 @@ namespace Servicio_Windows_MantenimientoBD
         }
 
         #endregion
-
     }
 }

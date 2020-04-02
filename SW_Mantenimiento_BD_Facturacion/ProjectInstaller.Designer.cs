@@ -1,4 +1,4 @@
-﻿namespace Servicio_Windows_MantenimientoBD
+﻿namespace SW_Mantenimiento_BD_Facturacion
 {
     partial class ProjectInstaller
     {
@@ -39,9 +39,7 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "Servicio que elimina los backup de los respaldos de facturacion";
-            this.serviceInstaller1.DisplayName = "Servicio_Mantenimiento_Bds";
-            this.serviceInstaller1.ServiceName = "Servicio_Mantenimiento_Bds";
+            this.serviceInstaller1.ServiceName = "SERVICIO MANTANIMIENTO BD FACTURACION";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

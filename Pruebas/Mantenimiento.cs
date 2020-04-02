@@ -15,7 +15,10 @@ namespace Servicio_Windows_MantenimientoBD
     public partial class Mantenimiento : Form
     {
         #region Variables
-        private Timer Tmr_Intervalor = new Timer();
+        public Timer Tmr_Intervalor = new Timer();
+        public Int32 intervalo = 5000;
+        public Int32 dias = 30;
+        public string ruta = @"C:\Respaldos_Bds\Diarios";
         #endregion
 
 
@@ -42,7 +45,8 @@ namespace Servicio_Windows_MantenimientoBD
            
             try
             {
-                Tmr_Intervalor.Interval = Convert.ToInt32(ConfigurationManager.AppSettings["Intervalo"]);
+                //Tmr_Intervalor.Interval = Convert.ToInt32(ConfigurationManager.AppSettings["Intervalo"]);
+                Tmr_Intervalor.Interval = intervalo;
 
                 Tmr_Intervalor.Tick += new EventHandler(Tmr_Intervalor_Acciones);
                 Tmr_Intervalor.Enabled = true;
@@ -61,8 +65,7 @@ namespace Servicio_Windows_MantenimientoBD
         /// <param name="e"></param>
         private void Tmr_Intervalor_Acciones(object sender, EventArgs e)
         {
-            String ruta = "";
-            Int32 dias = 0;
+            
             DateTime fecha_actual = DateTime.Now;
             DateTime fecha_respaldo = new DateTime();
 
@@ -74,16 +77,16 @@ namespace Servicio_Windows_MantenimientoBD
 
             try
             {
-                ruta = ConfigurationManager.AppSettings["Ruta"].ToString();
+                //ruta = ConfigurationManager.AppSettings["Ruta"].ToString();
                 DirectoryInfo Directorios = new DirectoryInfo(ruta);
             
-                dias = Convert.ToInt32(ConfigurationManager.AppSettings["Dias"]);
+                //dias = Convert.ToInt32(ConfigurationManager.AppSettings["Dias"]);
 
 
                 //  se recorren las carpetas
                 foreach (var carpeta in Directorios.GetDirectories())
                 {
-                    Console.WriteLine(carpeta.Name);
+                    //Console.WriteLine(carpeta.Name);
 
                     //  se obtienen los archivos
                     DirectoryInfo Archivos = new DirectoryInfo(ruta + "\\" + carpeta.Name);
@@ -125,9 +128,9 @@ namespace Servicio_Windows_MantenimientoBD
                         }
 
 
-                        Console.WriteLine(año);
-                        Console.WriteLine(mes);
-                        Console.WriteLine(dia);
+                        //Console.WriteLine(año);
+                        //Console.WriteLine(mes);
+                        //Console.WriteLine(dia);
 
                         //  se carga la fecha
                         fecha_respaldo = new DateTime(año, mes, dia);
@@ -138,13 +141,13 @@ namespace Servicio_Windows_MantenimientoBD
                         ts_dias_transcurridos = fecha_actual - fecha_respaldo;
 
                         dias_transcurridos = ts_dias_transcurridos.Days;
-                        Console.WriteLine(dias_transcurridos);
+                        //Console.WriteLine(dias_transcurridos);
 
                         //  validamos la cantidad de dias
                         if (dias_transcurridos >= dias)
                         {
                             File.Delete(ruta + "\\" + carpeta.Name + "\\" + archivo.Name);
-                            Console.WriteLine("Borrado ****" + archivo.Name);
+                            //Console.WriteLine("Borrado ****" + archivo.Name);
                         }
 
 
