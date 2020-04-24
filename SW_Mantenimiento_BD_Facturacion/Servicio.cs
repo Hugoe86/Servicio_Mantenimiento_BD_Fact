@@ -54,7 +54,7 @@ namespace SW_Mantenimiento_BD_Facturacion
         /// <param name="e"></param>
         private void Tmr_Intervalor_Acciones(object sender, EventArgs e)
         {
-            //StreamWriter SW = new StreamWriter("C:\\Respaldos_Bds\\Historial.txt", true);
+            StreamWriter SW = new StreamWriter("C:\\Respaldos_Bds\\Historial.txt", true);
 
             DateTime fecha_actual = DateTime.Now;
             DateTime fecha_respaldo = new DateTime();
@@ -138,14 +138,14 @@ namespace SW_Mantenimiento_BD_Facturacion
                         //Console.WriteLine(dias_transcurridos);
 
 
-                        //SW.WriteLine(dias_transcurridos);
+                        //SW.WriteLine("dias transucrridos: " + dias_transcurridos);
 
                         //  validamos la cantidad de dias
                         if (dias_transcurridos >= dias)
                         {
                             File.Delete(ruta + "\\" + carpeta.Name + "\\" + archivo.Name);
                             //Console.WriteLine("Borrado ****" + archivo.Name);
-                            //SW.WriteLine("Borrado ****" + archivo.Name);
+                            SW.WriteLine("Borrado ****" + archivo.Name);
                         }
 
 
@@ -153,19 +153,16 @@ namespace SW_Mantenimiento_BD_Facturacion
 
                 }
 
-
-                Tmr_Intervalor.Enabled = false;
             }
             catch (Exception ex)
             {
                 //SW.WriteLine(ex.Message);
                 throw new Exception(ex.Message);
-                //SW.WriteLine(ex.Message);
+                SW.WriteLine(ex.Message);
             }
             finally
             {
-                //SW.Close();
-                //SW.Close();
+                SW.Close();
             }
         }
 
